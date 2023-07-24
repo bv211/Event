@@ -5,7 +5,7 @@ class Counter {
 	int _count{ 0 };
 
 public:
-	Event<int> on_count_chaged_event;
+	Event on_count_chaged_event;
 
 	int get_count() const {
 		return _count;
@@ -18,6 +18,6 @@ public:
 
 private:
 	void call_event() {
-		on_count_chaged_event.invoke(_count);
+		on_count_chaged_event.invoke();
 	}
 };

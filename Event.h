@@ -3,25 +3,21 @@
 
 using namespace std;
 
-template <class... TParams>
 class IEventHandler {
 public:
-	virtual void call(TParams... params) = 0;
+	virtual void call() = 0;
 };
 
-template <class... TParams>
 class Event {
-	using TEvent = IEventHandler<TParams...>;
-
-	vector<TEvent*> _observers;
+	vector<IEventHandler*> _observers;
 
 public:
-	void operator+=	(TEvent& pointer) {
+	void operator+=	(IEventHandler& pointer) {
 		_observers.push_back(&pointer);
 	}
 
-	void invoke(TParams... params) {
+	void invoke() {
 		for (auto& item : _observers)
-			item->call(params...);
+			item->call();
 	}
 };
